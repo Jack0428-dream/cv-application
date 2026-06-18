@@ -1,120 +1,173 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+function Button (props) {
+  const buttonStyle = {
+    backgroundImage: props.color,
+    fontSize: props.fontSize + 'px'
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
+    <button style={buttonStyle}>{props.text}</button>
+  )
+}
+
+function App() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [mail, setMail] = useState('');
+  const [number, setNumber] = useState('');
+
+  const fullName = firstName + ' ' + lastName;
+
+  function firstNameChange(e) {
+    setFirstName(e.target.value);
+  }
+
+  function lastNameChange(e) {
+    setLastName(e.target.value);
+  }
+
+  function emailChange(e) {
+    setMail(e.target.value);
+  }
+
+  function telChange(e) {
+    setNumber(e.target.value);
+  }
+
+  const generalInfo = [{name:fullName, email:mail, tel: number}];
+
+  function EducationList(items) {
+    return (
+      <>
+      {items.map((item) => {
         <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+          <h2>School Name: {item.name}</h2>
+          <h2>Major/Study : {item.study}</h2>
+          <h2>Date: {item.date}</h2>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      })}
+      </>
+    )
+  }
 
-      <div className="ticks"></div>
+  const educationInfo = [];
+  const [experience, setExperience] = useState(initialItems);
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+  function addEducation() {
+
+  }
+
+  const 
+  
+  return (
+    <>
+    <section>
+      <h1>General Information</h1>
+    <div className="header">
+        <div className="namesec">
+            <div>
+                <label >First Name:</label>
+                <input onChange={firstNameChange}/>
+            </div>
+
+            <div>
+                <label>Last Name:</label>
+                <input onChange={lastNameChange}/>
+            </div>
+
+            <h2>{fullName}</h2>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+        <div className="emailsec">
+            <label>E-mail Address: </label>
+            <input type="email" onChange={emailChange}/>
+
+            <h2>{mail}</h2>
+        </div>
+
+        <div className="telsec">
+            <label>Phone Number: </label>
+            <input type="tel" onChange={telChange}/>
+
+            <h2>{number}</h2>
+        </div>
+    </div>
+    </section>
+
+    <section>
+      <h1>Educational Experience</h1>
+
+      <div>
+        <div>
+          <label>School Name: </label>
+          <input type="text" />
+        </div>
+        
+        <div>
+          <label>Title of Study: </label>
+          <input type="text" />
+        </div>
+
+        <div>
+          <label>Date of Study: </label>
+
+          <div>
+            <label>From</label>
+            <input type="date" />
+          </div>
+
+          <div>
+            <label>Until</label>
+            <input type="date" />
+          </div>
+        </div>
+
+        <Button text="Add" fontSize="15" className="btn"/>
+      </div>
+    </section>
+
+    <section>
+      <h1>Working Experience</h1>
+      <div>
+
+        <div>
+          <label>Company Name: </label>
+          <input type="text" />
+        </div>
+
+        <div>
+          <label>Position Title: </label>
+          <input type="text" />
+        </div>
+
+        <div>
+          <label>Main Responsibilities of you jobs: </label>
+          <textarea />
+        </div>
+
+
+        <div>
+          <label>Date of employment: </label>
+
+          <div>
+            <label>From</label>
+            <input type="date" />
+          </div>
+
+          <div>
+            <label>Until</label>
+            <input type="date" />
+          </div>
+
+        </div>
+
+        <Button text="Add" fontSize="15"/>
+      </div>
+    </section>
+
+    <Button text="Submit" fontSize="20"/>
     </>
   )
 }
